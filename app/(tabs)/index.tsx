@@ -1,9 +1,9 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CoinFlip } from '../../components/features/CoinFlip';
-import { WheelOfChoices } from '../../components/features/WheelOfChoices';
-import { colors, fontSizes, spacing } from '../../constants/theme';
+
+import CoinFlip from '../../components/features/CoinFlip';
+import WheelOfChoices from '../../components/features/WheelOfChoices';
 
 export default function HomeScreen() {
   const [activeTab, setActiveTab] = useState<'coin' | 'wheel'>('coin');
@@ -24,10 +24,17 @@ export default function HomeScreen() {
         >
           <FontAwesome5
             name="coins"
-            size={24}
-            color={activeTab === 'coin' ? colors.white : colors.primary}
+            size={22}
+            color={activeTab === 'coin' ? '#fff' : '#6D28D9'}
           />
-          <Text style={[styles.tabText, activeTab === 'coin' && styles.activeTabText]}>Coin Flip</Text>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === 'coin' && styles.activeTabText,
+            ]}
+          >
+            Coin Flip
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -36,15 +43,22 @@ export default function HomeScreen() {
         >
           <FontAwesome5
             name="bullseye"
-            size={24}
-            color={activeTab === 'wheel' ? colors.white : colors.primary}
+            size={22}
+            color={activeTab === 'wheel' ? '#fff' : '#6D28D9'}
           />
-          <Text style={[styles.tabText, activeTab === 'wheel' && styles.activeTabText]}>Wheel</Text>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === 'wheel' && styles.activeTabText,
+            ]}
+          >
+            Wheel
+          </Text>
         </TouchableOpacity>
       </View>
 
-      {/* Tab Content */}
-      <ScrollView style={styles.tabContent}>
+      {/* Content */}
+      <ScrollView contentContainerStyle={styles.content}>
         {activeTab === 'coin' ? <CoinFlip /> : <WheelOfChoices />}
       </ScrollView>
     </View>
@@ -52,20 +66,51 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background, padding: spacing.container },
-  header: { alignItems: 'center', marginBottom: 20 },
-  title: { fontSize: fontSizes.title, fontWeight: 'bold', color: colors.text },
-  subtitle: { fontSize: fontSizes.subtitle, color: colors.textMuted, marginTop: 4 },
-  tabsList: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 },
+  container: {
+    flex: 1,
+    backgroundColor: '#F9FAFB',
+    padding: 16,
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#6B7280',
+    marginTop: 4,
+  },
+  tabsList: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 16,
+  },
   tabButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.tabPadding,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
     borderRadius: 12,
-    backgroundColor: colors.secondary,
+    backgroundColor: '#E5E7EB',
   },
-  activeTab: { backgroundColor: colors.primary },
-  tabText: { marginLeft: 8, fontSize: fontSizes.button, fontWeight: '600', color: colors.primary },
-  activeTabText: { color: colors.white },
-  tabContent: { flex: 1 },
+  activeTab: {
+    backgroundColor: '#6D28D9',
+  },
+  tabText: {
+    marginLeft: 8,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#6D28D9',
+  },
+  activeTabText: {
+    color: '#fff',
+  },
+  content: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
 });
